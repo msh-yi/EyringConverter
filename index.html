@@ -1,0 +1,63 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Eyring calculator</title>
+    <meta name="description" content="Converts between various measures of reaction selectivity">
+    <meta name="author" content="Marcus Sak">
+
+    <meta property="og:title" content="Eyring calculator">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:description" content="Converts between various measures of reaction selectivity">
+    <meta property="og:image" content="image.png">
+
+    <!-- <link rel="icon" href="/favicon.ico">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">  -->
+
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+
+</head>
+
+<body>
+
+    <h2>Eyring calculator</h2>
+    Enter your desired values, then press "tab" or click outside of the input box. If you only edit the temperature, the website assumes the e.r. is constant and will calculate &Delta;&Delta;G<sup>&#8225;</sup> based on the current e.r. at the new temperature.
+    <p>
+    </p>
+
+    <form id="form">
+        <label for="temp">Temperature (K)</label><br>
+        <input id="temp" value="298.15" type="number" onchange="update_temp();"><br>
+
+        <label for="ee">ee (%)</label><br>
+        <input id="ee" value="90" type="number" onchange="update(this.id);"><br>
+
+        <label for="er_maj">er</label><br>
+        <input id="er_maj" value="95" type="number" onchange="update(this.id);"> :
+        <input id="er_min" value="5" type="number" onchange="update(this.id);"> <br>
+
+        <label for="krel"></label><i>k</i><sub>rel</sub><br>
+        <input id="krel" value="19" type="number" onchange="update(this.id);"><br>
+
+        <label for="ddg_kcal"></label>&Delta;&Delta;G<sup>&#8225;</sup> (kcal/mol) <br>
+        <input id="ddg_kcal" value="1.37" type="number" onchange="update(this.id);"><br>
+
+        <label for="ddg_kj"></label>&Delta;&Delta;G<sup>&#8225;</sup> (kJ/mol) <br>
+        <input id="ddg_kj" value="1.37" type="number" onchange="update(this.id);"><br>
+
+
+        <!-- <label for="t_half"></label><i>t</i><sub>1/2</sub>(s<sup>-1</sup>)<br>
+        <input id="t_half" value="0.4" type="number" onchange="update(this.id);"><br>  -->
+        <!-- potentially hours/days -->
+    </form>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
