@@ -11,7 +11,8 @@ var fwd_fn_dict = {
     "er_min": er_er_min,
     "krel": er_krel,
     "ddg_kcal": er_ddg_kcal,
-    "ddg_kj": er_ddg_kj
+    "ddg_kj": er_ddg_kj,
+    "ddg_MM": er_ddg_mm,
 }
 
 /* get er from these values */
@@ -21,15 +22,9 @@ var rev_fn_dict = {
     "er_min": er_min_er,
     "krel": krel_er,
     "ddg_kcal": ddg_kcal_er,
-    "ddg_kj": ddg_kj_er
+    "ddg_kj": ddg_kj_er,
+    "ddg_MM": ddg_mm_er,
 }
-// MAIN variable declarations
-/* var temp = 0.000;
-var er_maj = 0.000;
-var er_min = 0.000;
-var krel = 0.000;
-var ddg_kcal = 0.000;
-var ddg_kj = 0.000; */
 
 var temp = 0.000
 var er_maj = 0.000
@@ -37,7 +32,31 @@ var nchars = 0
 
 /* calculate everything in terms of e.r. */
 
-function update_temp() {
+function update_temp(input_id) {
+    
+    nchars = sigfigs(input_temp)
+    
+    if (input_id == "temp_c") {
+        document.getElementById("temp_k").value = trunc(c_to_k(input_temp), nchars)
+    }
+    else if (input_id == "temp_k") {
+        document.getElementById("temp_c").value = trunc(k_to_c(input_temp), nchars)
+    }
+    try {
+        var input_temp = document.getElementById(input_id).value
+        if ((input_id == "temp_k" && input_temp <= 0) || (input_id == "temp_c" && input_temp <= -273.15)) {
+            throw "Temperature should be positive Kelvins!"
+        }
+        if (isNaN(input_temp)) {
+            throw "Input must be a number!"
+        }
+    }
+    catch(err) {
+        document.getElementById("err_msg").innerHTML = err
+        document.getElementById("temp_k").value = 298.15
+        document.getElementById("temp_c").value = 25.0
+    }
+    
     update("er_maj")
 }
 
@@ -50,11 +69,11 @@ function update(input_id) {
 
     var elts = document.getElementById("form").elements
     /* initialize all input values */
-    temp = document.getElementById("temp").value
+    temp = document.getElementById("temp_k").value
     er_maj = rev_fn_dict[input_id](input_value) /* calculate er_maj first */
     /* compute each quantity */
     for (var i = 0; i < elts.length; i++) {
-        if (elts.item(i).id != "temp") {
+        if (elts.item(i).id != "temp_k" && elts.item(i).id != "temp_c") {
            elts.item(i).value = trunc(fwd_fn_dict[elts.item(i).id](er_maj), nchars)
         }
     }
@@ -81,6 +100,11 @@ function er_ddg_kcal(er) {
 
     /* \Delta G ^{\ddag} = -RT \cdot \ln{\frac{k_{rel} h}{\kappa k_B T}} */
     return er_ddg_kj(er) / 4.184
+}
+
+function er_ddg_mm(er) {
+
+    return er_ddg_kcal(er) / 5.0714
 }
 
 function er_ddg_kj(er) {
@@ -118,6 +142,18 @@ function ddg_kcal_er(ddg_kcal) {
 
 function ddg_kj_er(ddg_kj) {
     return ddg_kcal_er(ddg_kj / 4.184)
+}
+
+function ddg_mm_er(ddg_mm) {
+    return ddg_kcal_er(ddg_mm * 5.0714) /* 28 pieces contains 142 calories */
+}
+
+function c_to_k(c) {
+    return parseFloat(c) + 273.15
+}
+
+function k_to_c(k) {
+    return parseFloat(k) - 273.15
 }
 
 function sigfigs(n) {

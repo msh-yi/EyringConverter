@@ -20,40 +20,47 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">  -->
 
-    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+    <link rel="stylesheet" href="css/styles.css">
 
 </head>
 
 <body>
 
     <h2>Eyring calculator</h2>
-    Enter your desired values, then press "tab" or click outside of the input box. If you only edit the temperature, the website assumes the e.r. is constant and will calculate &Delta;&Delta;G<sup>&#8225;</sup> based on the current e.r. at the new temperature.
+    Enter your desired values, then press "tab"/"enter" or click outside of the input box. If you only edit the temperature, the app will calculate &Delta;&Delta;G<sup>&#8225;</sup> based on the current <i>k</i><sub>rel</sub> at the new temperature.
     <p>
     </p>
 
+    <p id="err_msg"></p>
+
     <form id="form">
-        <label for="temp">Temperature (K)</label><br>
-        <input id="temp" value="298.15" type="number" onchange="update_temp();"><br>
+        <label for="temp_k">Temperature (K)</label><br>
+        <input type="text" id="temp_k" value="298.15" type="number" onchange="update_temp(this.id)";><br>
+        
+        <label for="temp_c">Temperature (&#176;C)</label><br>
+        <input type="text" id="temp_c" value="25.0" type="number" onchange="update_temp(this.id)";><br>
 
-        <label for="ee">ee (%)</label><br>
-        <input id="ee" value="90" type="number" onchange="update(this.id);"><br>
+        <label for="ee">enantiomeric excess (%)</label><br>
+        <input type="text" id="ee" value="90" type="number" onchange="update(this.id);"><br>
 
-        <label for="er_maj">er</label><br>
-        <input id="er_maj" value="95" type="number" onchange="update(this.id);"> :
-        <input id="er_min" value="5" type="number" onchange="update(this.id);"> <br>
+        <label for="er_maj">enantiomeric ratio</label><br>
+        <input type="text" id="er_maj" value="95" type="number" onchange="update(this.id);"> :
+        <input type="text" id="er_min" value="5" type="number" onchange="update(this.id);"> <br>
 
         <label for="krel"></label><i>k</i><sub>rel</sub><br>
-        <input id="krel" value="19" type="number" onchange="update(this.id);"><br>
+        <input type="text" id="krel" value="19" type="number" onchange="update(this.id);"><br>
 
         <label for="ddg_kcal"></label>&Delta;&Delta;G<sup>&#8225;</sup> (kcal/mol) <br>
-        <input id="ddg_kcal" value="1.37" type="number" onchange="update(this.id);"><br>
-
+        <input type="text" id="ddg_kcal" value="1.7" type="number" onchange="update(this.id);"><br>
+        
         <label for="ddg_kj"></label>&Delta;&Delta;G<sup>&#8225;</sup> (kJ/mol) <br>
-        <input id="ddg_kj" value="1.37" type="number" onchange="update(this.id);"><br>
-
+        <input type="text" id="ddg_kj" value="7.3" type="number" onchange="update(this.id);"><br>
+        
+        <label for="ddg_MM"></label>&Delta;&Delta;G<sup>&#8225;</sup> (<a href="https://www.mms.com/en-us/experience-mms/flavors" target="_blank">Milk Chocolate M&#38;M</a>'s/mol) <br>
+        <input type="text" id="ddg_MM" value="0.34" type="number" onchange="update(this.id);"><br>
 
         <!-- <label for="t_half"></label><i>t</i><sub>1/2</sub>(s<sup>-1</sup>)<br>
-        <input id="t_half" value="0.4" type="number" onchange="update(this.id);"><br>  -->
+        <input type="text" id="t_half" value="0.4" type="number" onchange="update(this.id);"><br>  -->
         <!-- potentially hours/days -->
     </form>
 
