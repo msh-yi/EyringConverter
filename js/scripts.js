@@ -33,17 +33,10 @@ var nchars = 0
 /* calculate everything in terms of e.r. */
 
 function update_temp(input_id) {
-    
-    nchars = sigfigs(input_temp)
-    
-    if (input_id == "temp_c") {
-        document.getElementById("temp_k").value = trunc(c_to_k(input_temp), nchars)
-    }
-    else if (input_id == "temp_k") {
-        document.getElementById("temp_c").value = trunc(k_to_c(input_temp), nchars)
-    }
+
     try {
         var input_temp = document.getElementById(input_id).value
+
         if ((input_id == "temp_k" && input_temp <= 0) || (input_id == "temp_c" && input_temp <= -273.15)) {
             throw "Temperature should be positive Kelvins!"
         }
@@ -51,13 +44,24 @@ function update_temp(input_id) {
             throw "Input must be a number!"
         }
     }
-    catch(err) {
+    catch (err) {
         document.getElementById("err_msg").innerHTML = err
         document.getElementById("temp_k").value = 298.15
         document.getElementById("temp_c").value = 25.0
+        update("er_maj")
+        return
     }
-    
-    update("er_maj")
+
+    nchars = sigfigs(input_temp)
+
+    if (input_id == "temp_c") {
+        document.getElementById("temp_k").value = trunc(c_to_k(input_temp), nchars)
+    }
+    else if (input_id == "temp_k") {
+        document.getElementById("temp_c").value = trunc(k_to_c(input_temp), nchars)
+
+        update("er_maj")
+    }
 }
 
 function update(input_id) {
@@ -74,7 +78,7 @@ function update(input_id) {
     /* compute each quantity */
     for (var i = 0; i < elts.length; i++) {
         if (elts.item(i).id != "temp_k" && elts.item(i).id != "temp_c") {
-           elts.item(i).value = trunc(fwd_fn_dict[elts.item(i).id](er_maj), nchars)
+            elts.item(i).value = trunc(fwd_fn_dict[elts.item(i).id](er_maj), nchars)
         }
     }
 }
