@@ -36,6 +36,8 @@ h1,h2,h3
   background-color: #042a2b;
   background-image: linear-gradient(490deg, #3f5ef8, #dd3053);
   background-size: 50%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
   -webkit-text-fill-color: transparent; 
   -moz-text-fill-color: transparent;
   font-size: 32px;
