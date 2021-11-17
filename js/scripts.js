@@ -60,8 +60,8 @@ function update_temp(input_id) {
     else if (input_id == "temp_k") {
         document.getElementById("temp_c").value = trunc(k_to_c(input_temp), nchars)
 
-        update("er_maj")
     }
+    update("er_maj")
 }
 
 function update(input_id) {
