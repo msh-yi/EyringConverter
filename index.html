@@ -29,18 +29,27 @@
 <body>
 
     <h2>Eyring calculator</h2>
-    enter your desired values, then press "tab"/"enter" or click outside of the input box. if you only edit the temperature, the app will calculate &Delta;&Delta;G<sup>&#8225;</sup> based on the current <i>k</i><sub>rel</sub> at the new temperature.
-    <p>
-    </p>
+    enter desired values, then press "tab" or "enter", or click outside of the input box. when the temperature is changed, a new &Delta;&Delta;G<sup>&#8225;</sup> will be calculated based on the current <i>k</i><sub>rel</sub>.
 
-    <p id="err_msg"></p>
+    <p> </p>
+
+    <p id="err_msg" class="err-msg"></p>
 
     <form id="form">
-        <label for="temp_k">temperature (K)</label><br>
-        <input id="temp_k" value="298.15" type="number" onchange="update_temp(this.id)";><br>
-        
-        <label for="temp_c">temperature (&#176;C)</label><br>
-        <input id="temp_c" value="25.0" type="number" onchange="update_temp(this.id)";><br>
+        <div class="grid">
+            <div class="cell">
+                <label for="temp_k">temperature (K)</label><br>
+                <input id="temp_k" value="298.15" type="number" onchange="update_temp(this.id)" ;>
+            </div>
+
+            <div class="cell">
+                <label for="temp_c">temperature (&#176;C)</label><br>
+                <input id="temp_c" value="25.0" type="number" onchange="update_temp(this.id)" ;>
+            </div>
+
+        </div>
+
+        <p></p>
 
         <label for="ee">enantiomeric excess (%)</label><br>
         <input id="ee" value="90" type="number" onchange="update(this.id);"><br>
@@ -54,11 +63,13 @@
 
         <label for="ddg_kcal"></label>&Delta;&Delta;G<sup>&#8225;</sup> (kcal/mol) <br>
         <input id="ddg_kcal" value="1.7" type="number" onchange="update(this.id);"><br>
-        
+
         <label for="ddg_kj"></label>&Delta;&Delta;G<sup>&#8225;</sup> (kJ/mol) <br>
         <input id="ddg_kj" value="7.3" type="number" onchange="update(this.id);"><br>
-        
-        <label for="ddg_MM"></label>&Delta;&Delta;G<sup>&#8225;</sup> (<a href="https://www.mms.com/en-us/experience-mms/flavors" target="_blank">Milk Chocolate M&#38;M</a>'s/mol) <br>
+
+        <label for="ddg_MM"></label>&Delta;&Delta;G<sup>&#8225;</sup> (<a
+            href="https://www.mms.com/en-us/experience-mms/flavors" target="_blank">Milk Chocolate M&#38;M</a>'s/mol)
+        <br>
         <input id="ddg_MM" value="0.34" type="number" onchange="update(this.id);"><br>
 
         <!-- <label for="t_half"></label><i>t</i><sub>1/2</sub>(s<sup>-1</sup>)<br>
@@ -66,13 +77,14 @@
         <!-- potentially hours/days -->
     </form>
 
-    
-    <p style="margin-top:20px;" ></p>
+
+    <p style="margin-top:20px;"></p>
     <hr>
 
     <div class="footer">
         <footer>
-            <p class="github">feedback/pull request <a href="https://github.com/msh-yi/EyringConverter" target="_blank">here</a>!</p>
+            <p class="github">feedback/pull request <a href="https://github.com/msh-yi/EyringConverter"
+                    target="_blank">here</a>!</p>
         </footer>
     </div>
 

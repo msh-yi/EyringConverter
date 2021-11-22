@@ -38,7 +38,7 @@ function update_temp(input_id) {
         var input_temp = document.getElementById(input_id).value
 
         if ((input_id == "temp_k" && input_temp <= 0) || (input_id == "temp_c" && input_temp <= -273.15)) {
-            throw "Temperature should be positive Kelvins!"
+            throw "Temperature should be > 0 Kelvins!"
         }
         if (isNaN(input_temp)) {
             throw "Input must be a number!"
